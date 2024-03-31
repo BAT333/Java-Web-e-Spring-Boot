@@ -1,0 +1,28 @@
+ /* if(ValidacaoClient.validacao(dados)){
+           Client clients =  repository.CLIENT(dados.cpf());
+
+            if(clients.getCpf().equals(dados.cpf())){
+                return "ESSE CLIENTE JA EXISTE";
+            }else {
+
+                Client client = new Client(dados);
+                repository.save(client);
+                Integer cvv = Integer.valueOf(Cardrandom.numbercvv());
+                BigDecimal numberCard = BigDecimal.valueOf(Cardrandom.numbersCard());
+                LocalDate date = LocalDate.now().plusYears(4).plusMonths(6);
+                Card card = new Card(null, numberCard, date, cvv, BigDecimal.ZERO, false, dados.cpf(), client);
+                repositoryCard.save(card);
+                return "Cliente cadastrado com sucesso";
+            }
+        }else {
+            return "CLIENTE NÃO CADASTRADO";
+        }
+
+        */
+
+
+        for(DadosListCard cardPes:cards){
+            if(cardPes.numberCard().equals(card.numberCard())&&cardPes.cpf().equals(card.cpf())){
+                cardre = cardPes ;
+            }
+        }
