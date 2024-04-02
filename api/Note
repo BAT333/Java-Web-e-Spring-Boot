@@ -26,3 +26,9 @@
                 cardre = cardPes ;
             }
         }
+
+          /*
+                String diaCompra = compra.getDate().format(formatter);
+                String mesfatura = dadosfatura.date().format(formatter);
+                date_format(data_compra,'%Y-%m') >='2024-04'
+                 */
