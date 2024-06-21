@@ -7,42 +7,42 @@ import com.ByteCard.api.Application.UserCase.Card.UpdateCard;
 import com.ByteCard.api.Infra.Controller.Card.modal.DataCard;
 import com.ByteCard.api.Infra.Controller.Card.modal.DataCardDTO;
 import com.ByteCard.api.Infra.Controller.Card.modal.DataCardFindDTO;
+import com.ByteCard.api.Infra.Controller.Card.service.ServiceCard;
 import com.ByteCard.api.Infra.Controller.Client.modal.DataClient;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("card")
 public class CardController {
-    private final RegisterCard registerClient;
-    private final FindCard findClient;
-    private final ActivesOrDelete activeOrDeleteClient;
-    private final UpdateCard updeteClient;
-
-    public CardController(RegisterCard registerClient, FindCard findClient, ActivesOrDelete activeOrDeleteClient, UpdateCard updeteClient) {
-        this.registerClient = registerClient;
-        this.findClient = findClient;
-        this.activeOrDeleteClient = activeOrDeleteClient;
-        this.updeteClient = updeteClient;
-    }
-    @PostMapping
+    @Autowired
+    private ServiceCard serviceCard;
+    @PostMapping("{id}")
     @Transactional
-    public ResponseEntity<DataCard> register(@RequestBody DataCardDTO dto){
-        return null;
+    public ResponseEntity<DataCard> register(Long id,@RequestBody @Valid DataCardDTO dto, UriComponentsBuilder builder){
+
+        return serviceCard.register(id,dto,builder);
     }
     @GetMapping
-    public ResponseEntity<DataCard> finds(@RequestBody DataCardFindDTO dto){
-        return null;
+    public ResponseEntity<List<DataCard>> finds(@RequestBody DataCardFindDTO dto){
+
+        return this.serviceCard.finds(dto);
     }
-    @DeleteMapping
+    @DeleteMapping("{id}")
     @Transactional
-    public ResponseEntity<Boolean> activesOrDelete(){
-        return null;
+    public ResponseEntity<Boolean> activesOrDelete(@PathVariable Long id){
+
+        return this.serviceCard.activesDelete(id);
     }
-    @PutMapping
+    @PutMapping("{id}")
     @Transactional
-    public ResponseEntity<DataCard> update(@RequestBody DataCardDTO dto){
-        return null;
+    public ResponseEntity<DataCard> update(@PathVariable Long id,@RequestBody DataCardDTO dto){
+        return this.serviceCard.update(id,dto);
     }
 }

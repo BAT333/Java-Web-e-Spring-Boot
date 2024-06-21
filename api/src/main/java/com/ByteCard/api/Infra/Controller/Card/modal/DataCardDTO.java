@@ -1,4 +1,11 @@
 package com.ByteCard.api.Infra.Controller.Card.modal;
 
-public record DataCardDTO() {
+import jakarta.validation.constraints.NotNull;
+
+import java.math.BigDecimal;
+
+public record DataCardDTO(
+        @NotNull
+        BigDecimal limit
+) {
 }

@@ -21,6 +21,6 @@ public class CardEntityMapper implements EntityFactory<Card, CardEntity> {
 
     @Override
     public CardEntity toEntity(Card card) {
-        return new CardEntity(card.getId(),card.getNumberCard(),card.getDate(), card.getCvv(), card.getLimit(),card.isStatus(), card.getClientCpf(), clientEntityMapper.toEntity(card.getClientID()));
+        return new CardEntity(card.getId(),card.getNumberCard(),card.getDate(), card.getCvv(), card.getLimit(),card.getActives(), card.getClientCpf(), clientEntityMapper.toEntity(card.getClientID()));
     }
 }

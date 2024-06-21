@@ -12,7 +12,7 @@ public class Card {
     private LocalDate date = LocalDate.now().plusYears(4).plusMonths(6);
     private String cvv;
     private BigDecimal limit;
-    private Boolean actives = true;
+    private Boolean actives;
     private String clientCpf;
 
     private Client clientID;
@@ -50,6 +50,10 @@ public class Card {
         this.actives = true;
         this.clientCpf = clientCpf;
         this.clientID = clientID;
+    }
+
+    public Card(BigDecimal limit) {
+        this.limit = limit;
     }
 
     public Long getId() {
@@ -92,11 +96,11 @@ public class Card {
         this.limit = limit;
     }
 
-    public boolean isStatus() {
+    public Boolean getActives() {
         return actives;
     }
 
-    public void setStatus(Boolean actives) {
+    public void setActives(Boolean actives) {
         this.actives = actives;
     }
 
@@ -152,9 +156,16 @@ public class Card {
     }
 
     public Boolean ativeOrDelete(Boolean actives) {
-        if(actives){
-            return this.actives = false;
-        }
-        return this.actives = true;
+       if(clientID.getActives()){
+           if(actives){
+               return this.actives = false;
+           }
+           return this.actives = true;
+       }
+       throw new RuntimeException("NO EXIST CARD");
+    }
+
+    public void delete() {
+        this.actives = false;
     }
 }

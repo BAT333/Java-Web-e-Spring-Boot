@@ -28,4 +28,5 @@ public class FindClient {
     public List<Client> findAllByActivesFalse(){
         return this.repositoryClient.findAllByActivesFalse();
     }
+
 }

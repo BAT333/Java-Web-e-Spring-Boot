@@ -35,4 +35,18 @@ public class CardEntity {
     @ManyToOne
     @JoinColumn(name = "id_cliente")
     private ClientEntity clientID;
+
+    @Override
+    public String toString() {
+        return "CardEntity{" +
+                "id=" + id +
+                ", numberCard='" + numberCard + '\'' +
+                ", date=" + date +
+                ", cvv='" + cvv + '\'' +
+                ", limit=" + limit +
+                ", actives=" + actives +
+                ", clientCpf='" + clientCpf + '\'' +
+                ", clientID=" + clientID +
+                '}';
+    }
 }

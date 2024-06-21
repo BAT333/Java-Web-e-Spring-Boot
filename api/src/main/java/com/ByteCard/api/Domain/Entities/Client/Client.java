@@ -1,5 +1,10 @@
 package com.ByteCard.api.Domain.Entities.Client;
+
+import com.ByteCard.api.Domain.Entities.Card.Card;
+import com.ByteCard.api.Domain.Entities.Client.model.DataUpdate;
+
 import java.util.Objects;
+import java.util.Set;
 
 public class Client {
     private Long id;
@@ -8,18 +13,19 @@ public class Client {
     private String email;
     private String telephone;
     private Boolean actives = true;
+    private Set<Card> cards;
 
     public Client() {
     }
 
     public Client(Long id, String name, String cpf, String email, String telephone, Boolean actives) {
-        Objects.requireNonNull(id,"ID NULL");
         this.id = id;
         this.name = name;
         this.cpf = cpf;
         this.email = email;
         this.telephone = telephone;
         this.actives = actives;
+
     }
 
     public Client(String name, String cpf, String email, String telephone) {
@@ -85,6 +91,14 @@ public class Client {
         return actives;
     }
 
+    public Set<Card> getCards() {
+        return cards;
+    }
+
+    public void setCards(Set<Card> cards) {
+        this.cards = cards;
+    }
+
     public void setActives(Boolean actives) {
         this.actives = actives;
     }
@@ -114,25 +128,29 @@ public class Client {
                 '}';
     }
 
-    public Client updete(Client client) {
-        if(client.name != null ){
-            this.name = client.name;
+    public Client updete(DataUpdate client) {
+        if(client.name() != null ){
+            this.name = client.name();
         }
-        if(client.cpf != null ){
-            this.cpf = client.cpf;
+        if(client.cpf() != null ){
+            this.cpf = client.cpf();
         }
-        if(client.email != null ){
-            this.email = client.email;
+        if(client.email() != null ){
+            this.email = client.email();
         }
-        if(client.telephone != null ){
-            this.telephone = client.telephone;
+        if(client.telephone() != null ){
+            this.telephone = client.telephone();
         }
         return this;
     }
+    public void registerCard(Card card){
+        card.setClientID(this);
+        this.cards.add(card);
+    }
 
-    public Boolean ativeOrDelete(Boolean actives) {
+    public Boolean ativeOrDelete(Boolean actives, Set<Card> card) {
         if(actives){
-         return this.actives = false;
+            return this.actives = false;
         }
         return this.actives = true;
     }

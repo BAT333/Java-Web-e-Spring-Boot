@@ -5,6 +5,7 @@ import com.ByteCard.api.Application.UserCase.Client.FindClient;
 import com.ByteCard.api.Application.UserCase.Client.RegisterClient;
 import com.ByteCard.api.Application.UserCase.Client.UpdeteClient;
 import com.ByteCard.api.Domain.Entities.Client.Client;
+import com.ByteCard.api.Domain.Entities.Client.model.DataUpdate;
 import com.ByteCard.api.Infra.Controller.Client.modal.DataClient;
 import com.ByteCard.api.Infra.Controller.Client.modal.DataClientDTO;
 import com.ByteCard.api.Infra.Controller.Client.modal.DataClientFindDTO;
@@ -38,10 +39,8 @@ public class ClientService {
     public ResponseEntity<List<DataClient>> finds(DataClientFindDTO dto) {
         if(dto.actives()){
             return ResponseEntity.ok(this.findClient.findAllByActivesTrue().stream().map(DataClient::new).collect(Collectors.toList()));
-
         }else {
             return ResponseEntity.ok(this.findClient.findAllByActivesFalse().stream().map(DataClient::new).collect(Collectors.toList()));
-
         }
     }
 
@@ -50,7 +49,7 @@ public class ClientService {
     }
 
     public ResponseEntity<DataClient> update(Long id, DataClientDTO dto) {
-        var cliententity = this.updeteClient.update(id,new Client(dto.name(), dto.cpf(), dto.email(), dto.telephone()));
+        var cliententity = this.updeteClient.update(id,new DataUpdate(dto.name(), dto.cpf(), dto.email(), dto.telephone()));
         return ResponseEntity.ok(new DataClient(cliententity.getId(), cliententity.getName(), cliententity.getCpf(), cliententity.getEmail(), cliententity.getTelephone(),cliententity.getActives()));
     }
 

@@ -4,7 +4,6 @@ package com.ByteCard.api.Domain.Entities.Card;
 import com.ByteCard.api.Domain.Entities.Client.Client;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -14,7 +13,12 @@ public interface CardsConstructor {
         Objects.requireNonNull(clientCpf,"CPF NULL");
         Objects.requireNonNull(clientID, "CLIENT ID NULL");
         Objects.requireNonNull(card,"CARD NULL");
-        if(!card.getCvv().isEmpty()||!card.getNumberCard().isEmpty()) throw new RuntimeException("CONSTRUCTOR REGISTER");
+        if(clientID.getActives())throw new RuntimeException("CPF INVALID");
+        if(!clientCpf.matches("\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}"))throw new RuntimeException("FORMAT CPF INVALID");
+        if(card.getCvv() !=null){
+            if(!card.getCvv().isEmpty()||!card.getNumberCard().isEmpty()) throw new RuntimeException("CONSTRUCTOR REGISTER");
+
+        }
 
         card.setCvv(numbersCard(3));
         card.setNumberCard(numbersCard(16));
