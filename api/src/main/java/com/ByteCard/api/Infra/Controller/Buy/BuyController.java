@@ -7,9 +7,6 @@ import com.ByteCard.api.Application.UserCase.Buy.RegisterBuy;
 import com.ByteCard.api.Infra.Controller.Buy.modal.DataBuy;
 import com.ByteCard.api.Infra.Controller.Buy.modal.DataBuyDTO;
 import com.ByteCard.api.Infra.Controller.Buy.modal.DataBuyFindDTO;
-import com.ByteCard.api.Infra.Controller.Card.modal.DataCard;
-import com.ByteCard.api.Infra.Controller.Card.modal.DataCardDTO;
-import com.ByteCard.api.Infra.Controller.Card.modal.DataCardFindDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -17,15 +14,17 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("buy")
 public class BuyController {
-    private final RegisterBuy registerClient;
-    private final FindBuy findClient;
-    private final ActivesOrDelete activeOrDeleteClient;
+    private final RegisterBuy registerBuy;
+    private final FindBuy findBuy;
+    private final ActivesOrDelete activesOrDelete;
 
-    public BuyController(RegisterBuy registerClient, FindBuy findClient, ActivesOrDelete activeOrDeleteClient) {
-        this.registerClient = registerClient;
-        this.findClient = findClient;
-        this.activeOrDeleteClient = activeOrDeleteClient;
+    public BuyController(RegisterBuy registerBuy, FindBuy findBuy, ActivesOrDelete activesOrDelete) {
+        this.registerBuy = registerBuy;
+        this.findBuy = findBuy;
+        this.activesOrDelete = activesOrDelete;
     }
+
+
     @PostMapping
     @Transactional
     public ResponseEntity<DataBuy> register(@RequestBody DataBuyDTO dto){
